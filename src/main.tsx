@@ -8,7 +8,10 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { AppBar } from "./components/appbar";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <div className="bg-red-300 w-full h-full rounded-[15px]">
+    <main
+      role="main"
+      className="bg-white w-full  h-full rounded-[15px] overflow-hidden"
+    >
       <BrowserRouter>
         <AppBar />
         <Routes>
@@ -23,7 +26,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="/login" element={<div>login</div>} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </main>
   </React.StrictMode>
 );
 
