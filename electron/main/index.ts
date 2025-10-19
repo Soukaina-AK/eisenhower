@@ -9,7 +9,7 @@ const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 let isMaximized = false;
 const DEFAULT_WIDTH = 900;
-const DEFAULT_HEIGHT = 800;
+const DEFAULT_HEIGHT = 600;
 const MIN_WIDTH = 300;
 const MIN_HEIGHT = 500;
 // The built directory structure

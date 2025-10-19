@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 
 import "./index.css";
 
-import "./demos/ipc";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { AppBar } from "./components/appbar";
+import Login from "./pages/login";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <main
@@ -23,7 +23,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
               </div>
             }
           />
-          <Route path="/login" element={<div>login</div>} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </main>
