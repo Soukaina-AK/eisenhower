@@ -7,7 +7,11 @@ import { update } from "./update";
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
+let isMaximized = false;
+const DEFAULT_WIDTH = 900;
+const DEFAULT_HEIGHT = 800;
+const MIN_WIDTH = 300;
+const MIN_HEIGHT = 500;
 // The built directory structure
 //
 // ├─┬ dist-electron
@@ -48,8 +52,10 @@ async function createWindow() {
     title: "Main window",
     icon: path.join(process.env.VITE_PUBLIC, "favicon.ico"),
     frame: false,
-    width: 900,
-    height: 700,
+    width: DEFAULT_WIDTH,
+    height: DEFAULT_HEIGHT,
+    minWidth: MIN_WIDTH,
+    minHeight: MIN_HEIGHT,
     backgroundColor: "#00000000",
     transparent: true,
     hasShadow: false,
@@ -128,4 +134,30 @@ ipcMain.handle("open-win", (_, arg) => {
   } else {
     childWindow.loadFile(indexHtml, { hash: arg });
   }
+});
+
+ipcMain.on("request-quit", () => {
+  app.quit();
+});
+
+ipcMain.on("request-toggle", () => {
+  const window = BrowserWindow.getAllWindows()[0];
+  if (isMaximized) {
+    isMaximized = false;
+    window.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    window.center();
+  } else {
+    window.maximize();
+    isMaximized = true;
+  }
+});
+
+ipcMain.on("request-minimize", () => {
+  const window = BrowserWindow.getAllWindows()[0];
+  window.minimize();
+});
+
+ipcMain.on("request-maximize", () => {
+  const window = BrowserWindow.getAllWindows()[0];
+  window.maximize();
 });
