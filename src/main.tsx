@@ -6,6 +6,7 @@ import "./index.css";
 import "./demos/ipc";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { AppBar } from "./components/appbar";
+import Board from "./pages/board";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <main
@@ -18,12 +19,14 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route
             path="/"
             element={
-              <div>
+              <div className="flex flex-col">
                 <Link to={"/login"}>to login</Link>
+                <Link to={"/board"}>to board</Link>
               </div>
             }
           />
           <Route path="/login" element={<div>login</div>} />
+          <Route path="/board" element={<Board/>} />
         </Routes>
       </BrowserRouter>
     </main>
