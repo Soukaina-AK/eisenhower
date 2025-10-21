@@ -16,7 +16,7 @@ export default function SideBar() {
     }
 
   return (
-    <section className="min-w-[300px] h-[100%] task-list rounded-xl rounded-bl-none overflow-hidden border-[0.9px] border-dotted border-sky-700 bg-csky relative">
+    <section className="min-w-[300px] h-[100%] task-list rounded-xl rounded-bl-none lg:rounded-bl-xl overflow-hidden border-[0.9px] border-dotted border-sky-700 bg-csky relative">
         <div className="bg-csky p-3">ToDo</div>
         <section className="p-2 flex flex-col gap-2 ">
 
