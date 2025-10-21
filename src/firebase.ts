@@ -1,5 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import {
+  browserLocalPersistence,
+  getAuth,
+  GoogleAuthProvider,
+  NextOrObserver,
+  onAuthStateChanged,
+  setPersistence,
+  signOut,
+  User,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -16,4 +25,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const googleProvider = new GoogleAuthProvider();
+
+export const logout = () => signOut(auth);
+
+// Observe user state
+export const observeUser = (callback: NextOrObserver<User>) =>
+  onAuthStateChanged(auth, callback);
+
+setPersistence(auth, browserLocalPersistence);
+
 export default app;
