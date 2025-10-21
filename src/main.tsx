@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 
 import "./index.css";
 
-import "./demos/ipc";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { AppBar } from "./components/appbar";
+import Login from "./pages/login";
 import Board from "./pages/board";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -25,8 +25,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
               </div>
             }
           />
-          <Route path="/login" element={<div>login</div>} />
-          <Route path="/board" element={<Board/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/board" element={<Board />} />
         </Routes>
       </BrowserRouter>
     </main>

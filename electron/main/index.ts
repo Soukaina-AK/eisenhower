@@ -9,7 +9,7 @@ const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 let isMaximized = false;
 const DEFAULT_WIDTH = 900;
-const DEFAULT_HEIGHT = 800;
+const DEFAULT_HEIGHT = 600;
 const MIN_WIDTH = 300;
 const MIN_HEIGHT = 500;
 // The built directory structure
@@ -67,8 +67,32 @@ async function createWindow() {
 
       // Consider using contextBridge.exposeInMainWorld
       // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
-      // contextIsolation: false,
+      contextIsolation: true,
     },
+  });
+
+  win.webContents.setWindowOpenHandler(({ url }) => {
+    return {
+      action: "allow",
+      overrideBrowserWindowOptions: {
+        modal: true,
+        autoHideMenuBar: true,
+        width: 480,
+        height: 600,
+      },
+    };
+  });
+
+  win.webContents.on("will-navigate", (event, url) => {
+    // Example: if it's not our app's URL or the auth URL
+    if (
+      !url.includes("google.com") &&
+      !url.includes("localhost") &&
+      !url.startsWith("app://")
+    ) {
+      event.preventDefault();
+      shell.openExternal(url);
+    }
   });
 
   if (VITE_DEV_SERVER_URL) {
@@ -83,12 +107,6 @@ async function createWindow() {
   // Test actively push message to the Electron-Renderer
   win.webContents.on("did-finish-load", () => {
     win?.webContents.send("main-process-message", new Date().toLocaleString());
-  });
-
-  // Make all links open with the browser, not with the application
-  win.webContents.setWindowOpenHandler(({ url }) => {
-    if (url.startsWith("https:")) shell.openExternal(url);
-    return { action: "deny" };
   });
 
   // Auto update
