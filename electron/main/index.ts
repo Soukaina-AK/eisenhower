@@ -10,8 +10,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 let isMaximized = false;
 const DEFAULT_WIDTH = 900;
 const DEFAULT_HEIGHT = 600;
-const MIN_WIDTH = 300;
-const MIN_HEIGHT = 500;
+const MIN_WIDTH = 700;
+const MIN_HEIGHT = 750;
 // The built directory structure
 //
 // ├─┬ dist-electron
