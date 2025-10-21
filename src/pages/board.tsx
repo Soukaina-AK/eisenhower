@@ -1,6 +1,20 @@
+import AddTaskButton from "@/components/add-task-button";
 import Card from "@/components/card";
+import Input from "@/components/input";
+import Task from "@/components/task";
+import { useState } from "react";
 
 export default function Board() {
+    const [openAddTask, setOpenAddTask] = useState(false)
+
+    const handleOpenTaskForm = () => {
+        setOpenAddTask(true)
+    }
+
+    const handleCloseTaskForm = () => {
+        setOpenAddTask(false)
+    }
+
   return (
     <main className="flex flex-col md:flex-row gap-3 p-3 h-[90%] justify-center">
         <section className="flex-[0.7] flex flex-col justify-center items-center gap-4 p-3 rounded-xl">
@@ -19,8 +33,20 @@ export default function Board() {
                 <Card className="border-blue-400"/>
             </div>
         </section>
-        <section className="flex-[0.3] lg:max-w-[30vw] rounded-xl overflow-hidden border-[0.9px] border-dotted border-sky-700">
+        <section className="flex-[0.3] lg:max-w-[30vw] h-[100%] task-list rounded-xl overflow-hidden border-[0.9px] border-dotted border-sky-700 bg-csky relative">
             <div className="bg-csky p-3">ToDo</div>
+            <section className="p-2 flex flex-col gap-2 ">
+ 
+                {Array.from({ length: 10 }).map((_, i) => (
+                    <Task key={i} />
+                ))}
+
+                <div className="sticky bottom-0">
+                    {openAddTask === true ? <Input onClose={handleCloseTaskForm} /> : <AddTaskButton onClick={handleOpenTaskForm}/>}
+                    
+                    
+                </div>
+            </section>
         </section>
     </main>
   )
